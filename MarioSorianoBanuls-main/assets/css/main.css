@@ -1,0 +1,536 @@
+/* =========================================
+   Variables CSS - Paleta Cyberpunk
+========================================= */
+:root {
+    /* Colores Principales */
+    --bg-dark: #0a0b1e; /* Fondo principal muy oscuro */
+    --bg-card: rgba(16, 20, 40, 0.7); /* Fondo de tarjetas semitransparente */
+    --text-primary: #e0e0e0; /* Texto principal casi blanco */
+    --text-secondary: #a0a8c0; /* Texto secundario grisáceo */
+
+    /* Colores de Acento (Neón) */
+    --accent-cyan: #00f3ff; /* Cian eléctrico */
+    --accent-purple: #bc13fe; /* Morado neón */
+    --accent-gradient: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+
+    /* Tipografías */
+    --font-display: 'Orbitron', sans-serif; /* Para títulos impactantes */
+    --font-mono: 'Roboto Mono', monospace; /* Para subtítulos técnicos */
+    --font-body: 'Roboto', sans-serif; /* Para texto general */
+
+    /* Otros */
+    --section-spacing: 4rem;
+    --border-glow: 0 0 10px rgba(0, 243, 255, 0.3), 0 0 20px rgba(188, 19, 254, 0.2);
+}
+
+/* =========================================
+   Estilos Base y Reseteo
+========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+/* =========================================
+   Fondo y Atmósfera
+========================================= */
+.cyber-grid-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px; /* Tamaño de la cuadrícula */
+    background-position: center center;
+    z-index: -1; /* Detrás de todo */
+    pointer-events: none;
+    /* Efecto de viñeta para oscurecer los bordes */
+    mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+}
+
+#wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* =========================================
+   Tipografía General
+========================================= */
+h1, h2, h3 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-cyan);
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+    position: relative;
+    display: inline-block;
+}
+
+/* Línea decorativa debajo de los títulos de sección */
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-gradient);
+    box-shadow: var(--border-glow);
+}
+
+.center-title {
+    text-align: center;
+    display: block;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
+}
+
+.highlight-text {
+    color: var(--accent-cyan);
+    font-weight: bold;
+}
+
+/* =========================================
+   Sección Hero (Encabezado)
+========================================= */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80vh; /* Ocupa casi toda la altura de la pantalla */
+    padding: var(--section-spacing) 0;
+    flex-wrap: wrap; /* Para móviles */
+}
+
+.hero-content {
+    flex: 1 1 500px; /* Crece y se encoge, base de 500px */
+    padding-right: 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: white;
+    /* Efecto de texto con contorno brillante */
+    text-shadow:
+        0 0 5px var(--accent-cyan),
+        0 0 25px var(--accent-cyan),
+        0 0 50px var(--accent-purple);
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+/* Subtítulo Monoespaciado */
+.mono-subtitle {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    color: var(--accent-cyan);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+}
+
+.blinking-cursor {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.hero-tagline {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+}
+
+/* Contenedor de la Imagen Hero */
+.hero-image-container {
+    flex: 1 1 400px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Halo tecnológico detrás de la imagen */
+.tech-halo {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg at 50% 50%, transparent 0%, var(--accent-cyan) 20%, transparent 40%, var(--accent-purple) 60%, transparent 100%);
+    animation: rotate-halo 20s linear infinite;
+    opacity: 0.3;
+    filter: blur(20px);
+    z-index: -1;
+}
+
+@keyframes rotate-halo {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px; /* Un poco de borde redondeado */
+    position: relative;
+    z-index: 1;
+    /* Iluminación de borde (Rim Light) dramática */
+    box-shadow:
+        -15px 0 30px -5px rgba(188, 19, 254, 0.6), /* Luz morada izquierda */
+        15px 0 30px -5px rgba(0, 243, 255, 0.6),  /* Luz cian derecha */
+        0 0 20px 5px rgba(0, 0, 0, 0.5) inset; /* Sombra interior para profundidad */
+    /* IMPORTANTE: Para que este efecto funcione mejor, tu imagen debería ser un recorte (PNG transparente) */
+}
+
+/* =========================================
+   Contenido Principal (Grid de Tarjetas)
+========================================= */
+.main-content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* Dos columnas que se adaptan */
+    gap: 2rem;
+    margin-bottom: var(--section-spacing);
+}
+
+/* Estilo de Tarjeta Cyberpunk (Glassmorphism) */
+.cyber-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px); /* Efecto de vidrio esmerilado */
+    -webkit-backdrop-filter: blur(10px); /* Soporte para Safari */
+    border: 1px solid rgba(0, 243, 255, 0.1); /* Borde sutil */
+    border-radius: 15px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra profunda */
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Efecto Hover en las tarjetas */
+.cyber-card:hover {
+    transform: translateY(-5px); /* Levantar ligeramente */
+    border-color: rgba(0, 243, 255, 0.4);
+    box-shadow: var(--border-glow), 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Bordes brillantes en las esquinas (opcional, para más detalle) */
+.cyber-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.cyber-card:hover::before { opacity: 1; }
+
+.cyber-card .content p {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+/* Lista de Habilidades Técnica */
+.tech-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+/* Iconos de la lista */
+.tech-list li i {
+    color: var(--accent-cyan);
+    margin-right: 15px;
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px var(--accent-cyan);
+    width: 25px; /* Ancho fijo para alinear */
+    text-align: center;
+}
+
+/* =========================================
+   Sección Portfolio (Grid de Proyectos)
+========================================= */
+#portfolio {
+    padding-top: 2rem;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Grid de 6 columnas para mayor control */
+    gap: 2rem;
+}
+
+/* Ítem de Portfolio */
+.portfolio-item {
+    grid-column: span 2; /* Por defecto ocupan 2 columnas (3 por fila) */
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid rgba(0, 243, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transición con rebote suave */
+}
+
+.portfolio-item.wide-project {
+    grid-column: span 3; /* Los proyectos destacados ocupan 3 columnas (2 por fila) */
+}
+
+.portfolio-item.wide-project .overlay {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Efecto Hover en Ítem de Portfolio */
+.portfolio-item:hover {
+    transform: scale(1.03); /* Aumentar tamaño */
+    border-color: var(--accent-cyan);
+    box-shadow: var(--border-glow);
+    z-index: 10;
+}
+
+.image-frame {
+    position: relative;
+    width: 100%;
+    height: 250px; /* Altura fija para uniformidad */
+    overflow: hidden;
+}
+
+.image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cubrir el área sin deformar */
+    transition: transform 0.5s ease;
+}
+
+.portfolio-item:hover .image-frame img {
+    transform: scale(1.1); /* Zoom lento en la imagen */
+}
+
+/* Overlay de Texto al hacer Hover */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(10, 11, 30, 0.95), rgba(10, 11, 30, 0.7)); /* Gradiente oscuro */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Texto abajo */
+    padding: 2rem;
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(20px); /* Desplazado hacia abajo */
+}
+
+.portfolio-item:hover .overlay {
+    opacity: 1;
+    transform: translateY(0); /* Aparece y sube */
+}
+
+.project-title {
+    font-size: 1.3rem;
+    color: var(--accent-cyan);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
+}
+
+.project-desc {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+/* =========================================
+   Media Queries (Responsividad)
+========================================= */
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+    }
+    
+    .portfolio-item, 
+    .portfolio-item.wide-project {
+        grid-column: span 1; /* Ocupan todo el ancho disponible */
+    }
+
+    .hero-section {
+        flex-direction: column-reverse; /* Imagen arriba en móviles */
+        text-align: center;
+        padding: 2rem 0;
+    }
+
+    .hero-content {
+        padding-right: 0;
+        margin-top: 2rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .mono-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .hero-image-container {
+        flex: auto;
+        width: 100%;
+    }
+    
+    .hero-image {
+        max-width: 80%; /* Imagen más pequeña en móvil */
+    }
+
+    .tech-halo {
+        width: 300px;
+        height: 300px;
+    }
+
+    .main-content-grid {
+        grid-template-columns: 1fr; /* Una sola columna */
+    }
+}
+
+/* =========================================
+   Sección Contacto & Footer
+========================================= */
+
+.contact-section {
+    margin-top: var(--section-spacing);
+    text-align: center;
+    border-color: var(--accent-purple); /* Borde morado para diferenciar */
+    background: linear-gradient(to bottom, var(--bg-card), rgba(188, 19, 254, 0.05)); /* Sutil degradado morado */
+}
+
+.contact-intro {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+}
+
+/* Botón Cyberpunk Principal */
+.cyber-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--bg-dark); /* Texto oscuro */
+    background: var(--accent-cyan); /* Fondo Cian */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 5px;
+    box-shadow: 0 0 15px var(--accent-cyan);
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.cyber-button:hover {
+    background: var(--accent-purple);
+    color: white;
+    box-shadow: 0 0 20px var(--accent-purple), 0 0 40px var(--accent-purple);
+    transform: scale(1.05);
+}
+
+.cyber-button i {
+    margin-right: 10px;
+}
+
+/* Conexiones Sociales */
+.social-connect h3 {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.social-connect .icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0;
+}
+
+.social-connect .icons li {
+    list-style: none;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 243, 255, 0.1);
+    border: 2px solid rgba(0, 243, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--accent-cyan);
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: var(--accent-cyan);
+    color: var(--bg-dark);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 20px var(--accent-cyan);
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* Footer Copyright */
+#footer {
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 2rem;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    opacity: 0.6;
+}
