@@ -418,7 +418,47 @@ h1, h2, h3 {
 
     .hero-image-container {
         flex: auto;
+    }
+
+    /* On small screens always show the overlay descriptive panel (no hover available) */
+    /* Make image container expand to fit image + description, but limit image height */
+    .image-frame {
+        height: auto; /* let image + overlay stack vertically */
+    }
+
+    /* Limit the actual image height so cards stay compact and the overlay appears UNDER the image */
+    .image-frame img {
+        height: 160px; /* shorter images on most mobile devices */
         width: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Wide projects (larger cards) can be a bit taller but still compact */
+    .portfolio-item.wide-project .image-frame img {
+        height: 200px;
+    }
+
+    /* Reduce further on very small phones to avoid huge images */
+    /* (handled by separate media query below - kept here removed to avoid nested queries) */
+
+    .overlay {
+        position: relative; /* stack under content flow so it doesn't overlap other elements oddly */
+        height: auto; /* shrink to content so text is readable */
+        opacity: 1 !important; /* always visible on mobile */
+        transform: translateY(0) !important; /* disable translate used for desktop */
+        background: linear-gradient(to top, rgba(10, 11, 30, 0.95), rgba(10, 11, 30, 0.85));
+        justify-content: flex-start; /* show content at top for mobile readability */
+        padding: 1.25rem; /* slightly smaller padding on mobile */
+    }
+
+    .project-title {
+        font-size: 1.1rem; /* Reduce title size for narrow screens */
+    }
+
+    .project-desc {
+        font-size: 0.95rem; /* Slightly larger for reading comfort */
+        margin-bottom: 0.6rem;
     }
     
     .hero-image {
@@ -533,4 +573,42 @@ h1, h2, h3 {
     font-size: 0.8rem;
     font-family: var(--font-mono);
     opacity: 0.6;
+}
+
+/* ================================
+   Mobile button fixes
+   - make the main email button responsive on small screens
+   - allow text to wrap and reduce letter-spacing and padding
+=================================== */
+@media (max-width: 600px) {
+    .contact-section .cyber-button {
+        display: block; /* full-width-ish button */
+        width: min(92%, 420px);
+        margin: 1.25rem auto 2rem auto; /* center it */
+        padding: 0.8rem 1.25rem; /* smaller padding for mobile */
+        font-size: 0.95rem; /* reduce font a bit so long emails fit */
+        letter-spacing: 0.04em; /* reduce extra spacing on mobile */
+        text-transform: none; /* keep email lowercase for readability on mobile */
+        border-radius: 8px; /* slightly more rounded on mobile */
+        box-shadow: 0 0 12px var(--accent-cyan);
+        white-space: normal; /* allow wrapping */
+        word-break: break-word; /* break email across lines if needed */
+        text-align: center;
+    }
+
+    .contact-section .cyber-button i {
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+
+    /* Make sure social icons don't crowd the button area */
+    .contact-section .social-connect .icons {
+        gap: 1rem;
+    }
+}
+
+/* Very small phones (extra compact heights) */
+@media (max-width: 360px) {
+    .image-frame img { height: 140px; }
+    .portfolio-item.wide-project .image-frame img { height: 170px; }
 }
